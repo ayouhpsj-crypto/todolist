@@ -27,7 +27,6 @@ public class todopage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_todopage);
 
-        // ربط العناصر بالـ XML
         taskinput = findViewById(R.id.taskInput);
         addBtn = findViewById(R.id.addBtn);
         listview = findViewById(R.id.listView);
@@ -50,7 +49,7 @@ public class todopage extends AppCompatActivity {
 
                     taskList.add(task);
                 } else {
-                    // تعديل المهمة المحددة
+
                     taskList.set(selectedPosition, task);
                     selectedPosition = -1;
                 }
