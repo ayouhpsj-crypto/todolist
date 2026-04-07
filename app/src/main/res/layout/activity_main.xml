@@ -10,20 +10,22 @@
     tools:context=".MainActivity">
 
     <!-- Title -->
+
+    <!-- Username -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:text="Welcome  To To-Do-List"
+        android:textColor="#000000"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="#000"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"/>
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Username -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -43,7 +45,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password -->
@@ -73,16 +75,16 @@
     <!-- Login Button -->
     <Button
         android:id="@+id/loginbtn"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="60dp"
-        android:layout_margin="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#000000"
         android:text="Login"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
