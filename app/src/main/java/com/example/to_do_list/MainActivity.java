@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private final String CORRECT_USERNAME = "admin";
-    private final String CORRECT_PASSWORD = "1234";
+    private final String CORRECT_PASSWORD = "1111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

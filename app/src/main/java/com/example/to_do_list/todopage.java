@@ -1,4 +1,3 @@
-
 package com.example.to_do_list;
 
 import android.os.Bundle;
@@ -14,12 +13,12 @@ import java.util.ArrayList;
 
 public class todopage extends AppCompatActivity {
 
-    EditText taskinput;
-    Button addBtn;
-    ListView listview;
-    ArrayList<String> taskList;
-    ArrayAdapter<String> adapter;
-    int selectedPosition = -1;
+    private EditText taskInput;
+    private Button addBtn;
+    private ListView listView;
+    private ArrayList<String> taskList;
+    private ArrayAdapter<String> adapter;
+    private int selectedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +26,23 @@ public class todopage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_todopage);
 
-        taskinput = findViewById(R.id.taskInput);
+        taskInput = findViewById(R.id.taskInput);
         addBtn = findViewById(R.id.addBtn);
-        listview = findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
 
         taskList = new ArrayList<>();
 
         adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_1,
+                R.layout.item_task,
+                R.id.taskText,
                 taskList
         );
-
-        listview.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
 
         addBtn.setOnClickListener(v -> {
-            String task = taskinput.getText().toString();
+            String task = taskInput.getText().toString().trim();
             if (!task.isEmpty()) {
                 if (selectedPosition == -1) {
 
@@ -54,21 +53,13 @@ public class todopage extends AppCompatActivity {
                     selectedPosition = -1;
                 }
                 adapter.notifyDataSetChanged();
-                taskinput.setText("");
+                taskInput.setText("");
             }
         });
 
 
-        listview.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedTask = taskList.get(position);
-            taskinput.setText(selectedTask);
-            selectedPosition = position;
-        });
 
-        listview.setOnItemLongClickListener((parent, view, position, id) -> {
-            taskList.remove(position);
-            adapter.notifyDataSetChanged();
-            return true;
-        });
+
+
     }
 }
