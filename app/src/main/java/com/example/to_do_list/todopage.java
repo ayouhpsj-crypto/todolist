@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class todopage extends AppCompatActivity {
 
-    // EditText taskinput; wont be used any more
+    // EditText taskinput; wont be used anymore
     Button addBtn;
     ListView listview;
     ArrayList<String> taskList;
@@ -30,9 +30,9 @@ public class todopage extends AppCompatActivity {
         setContentView(R.layout.activity_todopage);
 
         // ربط العناصر بالـ XML
-        // taskinput = findViewById(R.id.taskInput); wont me used any more
-        addBtn = findViewById(R.id.addBtn);
-        listview = findViewById(R.id.listView);
+        // taskinput = findViewById(R.id.taskInput); // wont me used anymore
+        addBtn = findViewById(R.id.addBtn); // the add task button
+        listview = findViewById(R.id.listView); // the list of tasks
 
         taskList = new ArrayList<>();
 
@@ -47,34 +47,44 @@ public class todopage extends AppCompatActivity {
 
         addBtn.setOnClickListener(v -> {
 
-            // inflate teh creates a new task file
+            // inflate the creates a new task file
             View task = getLayoutInflater().inflate(R.layout.dialog_add_task, null);
 
             // find the input from the creates a new task window
             EditText Tname = task.findViewById(R.id.taskName);
-            EditText Ttype = task.findViewById(R.id.taskType); // not used for now
-            EditText Tdate = task.findViewById(R.id.taskDate); // not uesd for now
-            // EditText Ttime = task.findViewById(R.id.taskTime); // not used for now // temprerly removerd
+            EditText Ttype = task.findViewById(R.id.taskType);
+            EditText Tdate = task.findViewById(R.id.taskDate);
+            EditText Ttime = task.findViewById(R.id.taskTime);
 
-            // find the save button
+            // define the save button
             Button save = task.findViewById(R.id.saveButton);
 
-            AlertDialog pupUp = new AlertDialog.Builder(this).setView(task).create();
+            AlertDialog popUp = new AlertDialog.Builder(this).setView(task).create();
 
             // after clicking save
             save.setOnClickListener(W -> {
                 String name = Tname.getText().toString();
-                if (!name.isEmpty()) {
-                    // add the new task to the list with it's name
+                String type = Ttype.getText().toString();
+                String time = Ttime.getText().toString();
+                String date = Tdate.getText().toString();
+
+                if (!name.isEmpty() && !type.isEmpty() && !time.isEmpty() && !date.isEmpty()) {
+                    // add the new task to the list with its name
+                    taskList.add((name + " (" +type+ ") " +date+ " at " +time));
+                    adapter.notifyDataSetChanged();
+
+                    // exit the create window
+                    popUp.dismiss();
+                } else if (!name.isEmpty()) {
                     taskList.add(name);
                     adapter.notifyDataSetChanged();
 
                     // exit the create window
-                    pupUp.dismiss();
+                    popUp.dismiss();
                 }
             });
             // makes the old window appear angain
-            pupUp.show();
+            popUp.show();
         });
 
         /*
