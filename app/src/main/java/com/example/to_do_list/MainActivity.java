@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (userText.equals(CORRECT_USERNAME) && passText.equals(CORRECT_PASSWORD)) {
                 Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(MainActivity.this, todopage.class);
+                Intent intent = new Intent(MainActivity.this, todolist.class);
                 startActivity(intent);
                 finish();
             } else {
