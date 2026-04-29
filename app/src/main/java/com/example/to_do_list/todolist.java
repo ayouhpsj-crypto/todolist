@@ -11,6 +11,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class todolist extends AppCompatActivity {
 
@@ -20,8 +21,20 @@ public class todolist extends AppCompatActivity {
 
     private ArrayList<String> taskList;
     private ArrayAdapter<String> adapter;
+    private DatabaseList databaseList;
 
     private int selectedPosition = -1;
+
+    private void loadTasks() {
+
+        taskList.clear();
+
+        List<Task> tasks = databaseList.getAllTasks();
+
+        for (Task task : tasks) {
+            taskList.add(task.getName());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +42,14 @@ public class todolist extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_todolist);
 
+        listView = findViewById(R.id.listView);
+        databaseList = new DatabaseList(this);
+        taskList = new ArrayList<>();
         taskInput = findViewById(R.id.taskInput);
         addBtn = findViewById(R.id.addBtn);
         editBtn = findViewById(R.id.editBtn);
         deleteBtn = findViewById(R.id.deleteBtn);
         listView = findViewById(R.id.listView);
-
-        taskList = new ArrayList<>();
 
         adapter = new ArrayAdapter<>(
                 this,
@@ -44,6 +58,7 @@ public class todolist extends AppCompatActivity {
         );
 
         listView.setAdapter(adapter);
+        loadTasks();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             selectedPosition = position;
@@ -54,35 +69,24 @@ public class todolist extends AppCompatActivity {
             String task = taskInput.getText().toString().trim();
 
             if (!task.isEmpty()) {
-                taskList.add(task);
+                databaseList.insertData(task);
+                loadTasks();
                 adapter.notifyDataSetChanged();
                 taskInput.setText("");
             }
         });
 
         editBtn.setOnClickListener(v -> {
-
-            if (selectedPosition != -1) {
-
-                String updatedTask = taskInput.getText().toString().trim();
-
-                if (!updatedTask.isEmpty()) {
-                    taskList.set(selectedPosition, updatedTask);
-                    adapter.notifyDataSetChanged();
-                    taskInput.setText("");
-                    selectedPosition = -1;
-                }
-
-            } else {
-                Toast.makeText(this, "Select a task first", Toast.LENGTH_SHORT).show();
-            }
+            loadTasks();
         });
 
         deleteBtn.setOnClickListener(v -> {
 
             if (selectedPosition != -1) {
 
-                taskList.remove(selectedPosition);
+                Task task = databaseList.getAllTasks().get(selectedPosition);
+                databaseList.deleteTask(task);
+                loadTasks();
                 adapter.notifyDataSetChanged();
                 taskInput.setText("");
                 selectedPosition = -1;
