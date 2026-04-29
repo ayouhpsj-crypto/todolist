@@ -26,21 +26,43 @@ public class MainActivity extends AppCompatActivity {
         TextInputEditText username = findViewById(R.id.username);
         TextInputEditText password = findViewById(R.id.password);
         Button loginbtn = findViewById(R.id.loginbtn);
+        Button registerbtn = findViewById(R.id.registerbtn);
 
         loginbtn.setOnClickListener(v -> {
+
+            String userText = username.getText().toString();
+            String passText = password.getText().toString();
+
+
+            if (userText.isEmpty() || passText.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            } else{
+                DatabaseHelper databasehelper = new DatabaseHelper(MainActivity.this);
+
+                if (databasehelper.loginAccount(userText,passText,MainActivity.this)) {
+
+                    Intent intent = new Intent(MainActivity.this, todolist.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+        registerbtn.setOnClickListener(v -> {
             String userText = username.getText().toString();
             String passText = password.getText().toString();
 
             if (userText.isEmpty() || passText.isEmpty()) {
                 Toast.makeText(MainActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-            } else if (userText.equals(CORRECT_USERNAME) && passText.equals(CORRECT_PASSWORD)) {
-                Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+
+            } else {
+                DatabaseHelper databasehelper = new DatabaseHelper(MainActivity.this);
+
+                databasehelper.createAccount(userText, passText, MainActivity.this);
 
                 Intent intent = new Intent(MainActivity.this, todolist.class);
                 startActivity(intent);
                 finish();
-            } else {
-                Toast.makeText(MainActivity.this, "Username or Password incorrect", Toast.LENGTH_SHORT).show();
             }
         });
     }
