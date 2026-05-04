@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newTaskInput"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/addNewTask"
+        android:layout_width="361dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:text="Create a new taks"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="349dp"
+        android:layout_height="197dp"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.595"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNewTask"
+        app:layout_constraintVertical_bias="0.209"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/taskName"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:ems="10"
+            android:hint="enter the taks name"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="136dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/taskType"
+                android:layout_width="271dp"
+                android:layout_height="67dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="type"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="303dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/taskDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:ems="10"
+                    android:hint="date"
+                    android:inputType="date"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/taskTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:ems="10"
+                    android:hint="time"
+                    android:inputType="time"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
